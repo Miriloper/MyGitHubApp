@@ -13,7 +13,7 @@ import {
 
 import MyButton from "../components/MyButton";
 
-export default class Home extends React.Component {
+export default class Repos extends React.Component {
   constructor() {
     super();
     this.state = {
@@ -33,15 +33,15 @@ export default class Home extends React.Component {
           
           <View>
             <Text>
-              Hola mundo!
+              Hola soy repos!
             </Text>
             </View>
           <View>
             <MyButton
-                    onPress={() => this.props.navigation.navigate('Repos')}
-                    title="Repos"
+                    onPress={() => this.props.navigation.navigate('Home')}
+                    title="Home"
                     color="white"
-                    accessibilityLabel="Go to repos screen"
+                    accessibilityLabel="Go to home screen"
                   />
           </View>
         </ScrollView>
