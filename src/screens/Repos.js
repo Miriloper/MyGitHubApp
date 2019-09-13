@@ -12,22 +12,33 @@ import {
 // import AsyncStorage from "@react-native-community/async-storage";
 
 import MyButton from '../components/MyButton';
+import MyRepoComp from '../components/MyRepoComp';
 
 export default class Repos extends React.Component {
   constructor() {
     super();
     this.state = {
-      user: undefined,
+      data: [],
+      testName: 'Miriam'
     };
   }
 
   async componentDidMount() {
-    const url = 'https://api.github.com/users/miriloper/repos';
-    //https://api.github.com/users/${username}/repos
-    const response = await fetch(url);
-    const data = await response.json();
-    console.log(data);
+    try {
+      console.log(this.state.data)
+      const url = 'https://api.github.com/users/miriloper/repos';
+      //https://api.github.com/users/${username}/repos
+      const response = await fetch(url);
+      const dataAll = await response.json();
+      this.setState({
+        ...this.state,
+        data: dataAll,
+      });
+    } catch (error) {
+      console.log(error);
+    }
   }
+
 
   render() {
     return (
@@ -48,28 +59,7 @@ export default class Repos extends React.Component {
                 accessibilityLabel="Go to home screen"
               />
             </View>
-            <View style={styles.container}>
-              <Table borderStyle={{borderColor: 'transparent'}}>
-                <Row
-                  data={state.tableHead}
-                  style={styles.head}
-                  textStyle={styles.text}
-                />
-                {state.tableData.map((rowData, index) => (
-                  <TableWrapper key={index} style={styles.row}>
-                    {rowData.map((cellData, cellIndex) => (
-                      <Cell
-                        key={cellIndex}
-                        data={
-                          cellIndex === 3 ? element(cellData, index) : cellData
-                        }
-                        textStyle={styles.text}
-                      />
-                    ))}
-                  </TableWrapper>
-                ))}
-              </Table>
-            </View>
+            <MyRepoComp repos={this.state.data}></MyRepoComp>
           </ScrollView>
         </SafeAreaView>
       </Fragment>
@@ -114,10 +104,4 @@ const styles = StyleSheet.create({
     paddingRight: 12,
     textAlign: 'right',
   },
-  container: { flex: 1, padding: 16, paddingTop: 30, backgroundColor: '#fff' },
-  head: { height: 40, backgroundColor: '#808B97' },
-  text: { margin: 6 },
-  row: { flexDirection: 'row', backgroundColor: '#FFF1C1' },
-  btn: { width: 58, height: 18, backgroundColor: '#78B7BB',  borderRadius: 2 },
-  btnText: { textAlign: 'center', color: '#fff' }
 });

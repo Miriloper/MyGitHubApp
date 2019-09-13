@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, Linking, View} from 'react-native';
+import { ListItem } from 'react-native-elements'
 
 export default class MyRepoComp extends Component {
   constructor(props) {
@@ -8,35 +9,38 @@ export default class MyRepoComp extends Component {
       data: []
     };
   }
-
-  async componentDidMount() {
-    const url = 'https://api.github.com/users/miriloper/repos';
-    //https://api.github.com/users/${username}/repos
-    const response = await fetch(url);
-    const dataAll = await response.json();
-    this.setState({
-      ...this.state,
-      data: dataAll
+  
+  handleClick = (url) => {
+    Linking.canOpenURL(url).then(supported => {
+      if (supported) {
+        Linking.openURL(url);
+      } else {
+        console.log("Don't know how to open URL: " + url);
+      }
     })
-    console.log('apple')
-    console.log(this.data);
   }
 
-  //data.[].name
-  //data.[].html_url
+  // this.handleClick
+  // {{ source: { uri: el.html_url } }}
 
   render() {
     return (
       <View>
-        <Text>
-          {this.props.repos.map((el, index) => {
-          
-            return (
-              d
-            )
 
-          })}
-        </Text>
+          {/* <Text>
+            holo
+          </Text> */}
+        
+         
+          {this.props.repos.map((el, i) => 
+            <ListItem
+            key={i}
+            onPress={this.handleClick(el.html_url)}
+            title={el.name}
+            bottomDivider
+            />
+            )}
+       
       </View>
     )
   }
