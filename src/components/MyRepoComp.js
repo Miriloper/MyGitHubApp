@@ -10,7 +10,7 @@ export default class MyRepoComp extends Component {
     };
   }
   
-  handleClick = (url) => {
+  handleClick (url) {
     Linking.canOpenURL(url).then(supported => {
       if (supported) {
         Linking.openURL(url);
@@ -33,9 +33,9 @@ export default class MyRepoComp extends Component {
         
          
           {this.props.repos.map((el, i) => 
-            <ListItem
+            <ListItem button
+            onPress={() => this.handleClick(el.html_url)}
             key={i}
-            onPress={this.handleClick(el.html_url)}
             title={el.name}
             bottomDivider
             />

@@ -25,7 +25,6 @@ export default class Repos extends React.Component {
 
   async componentDidMount() {
     try {
-      console.log(this.state.data)
       const url = 'https://api.github.com/users/miriloper/repos';
       //https://api.github.com/users/${username}/repos
       const response = await fetch(url);
