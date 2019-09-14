@@ -26,12 +26,13 @@ const styles = StyleSheet.create({
   },
   button: {
     alignItems: 'center',
-    backgroundColor: '#5F1A37',
+    backgroundColor: '#fdd32a',
     padding: 10,
     borderRadius: 5,
   },
 
   text: {
-    color: 'white',
+    color: '#0d0906',
+    fontFamily: 'monospace'
   },
 });

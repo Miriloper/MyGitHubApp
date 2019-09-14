@@ -6,6 +6,7 @@ import {
   View,
   Text,
   Image,
+  ImageBackground,
   Header,
   StatusBar,
 } from 'react-native';
@@ -25,24 +26,26 @@ export default class Home extends React.Component {
   render() {
     return (
       <Fragment>
-        <StatusBar 
-          backgroundColor='black'
-        />
+        <StatusBar backgroundColor="black" />
         <SafeAreaView style={styles.header}>
           <ScrollView
             contentInsetAdjustmentBehavior="automatic"
+            //fillViewport="true"
             style={styles.scrollView}>
             <View style={styles.header}>
-              <Text style={styles.headerText}>FIND YOUR REPO</Text>
-            </View>
-            <View style={styles.spaceBtwn}>
+              <Text style={styles.headerText}>Find your repo</Text>
+              <Image
+                source={require('../../public/images/githubLogo.png')}
+                style={{width: 200, height: 200}}
+              />
               <MyButton
                 onPress={() => this.props.navigation.navigate('Repos')}
                 title="Repos"
-                color="white"
+                style={styles.homeButton}
                 accessibilityLabel="Go to repos screen"
               />
             </View>
+
           </ScrollView>
         </SafeAreaView>
       </Fragment>
@@ -52,54 +55,22 @@ export default class Home extends React.Component {
 
 const styles = StyleSheet.create({
   scrollView: {
-    backgroundColor: 'white',
-  },
-  engine: {
-    position: 'absolute',
-    right: 0,
-  },
-  body: {
-    backgroundColor: 'white',
-  },
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-    color: 'black',
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-    color: 'black',
-  },
-  highlight: {
-    fontWeight: '700',
-  },
-  footer: {
-    color: 'purple',
-    fontSize: 12,
-    fontWeight: '600',
-    padding: 4,
-    paddingRight: 12,
-    textAlign: 'right',
-  },
-  spaceBtwn: {
-    marginTop: 15,
-    marginBottom: 15
+    backgroundColor: 'transparent'
   },
   header: {
-    backgroundColor: 'white'
+    backgroundColor: '#f6f6f4', //'#f8b600'
+    alignItems: 'center',
   },
   headerText: {
     marginTop: 10,
     marginBottom: 10,
-    color: '#73C2BE',
+    color: '#fdd32a',
     fontSize: 25,
     textAlign: 'center',
-    fontWeight: 'bold'
+    fontWeight: 'bold',
+    fontFamily: 'monospace',
+  },
+  homeButton: {
+    backgroundColor: 'red'
   }
 });

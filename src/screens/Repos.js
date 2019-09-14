@@ -29,6 +29,7 @@ export default class Repos extends React.Component {
       //https://api.github.com/users/${username}/repos
       const response = await fetch(url);
       const dataAll = await response.json();
+      console.log(dataAll)
       this.setState({
         ...this.state,
         data: dataAll,
@@ -47,7 +48,13 @@ export default class Repos extends React.Component {
             contentInsetAdjustmentBehavior="automatic"
             style={styles.scrollView}>
             <View>
-              <Text>Hola soy repos!</Text>
+              <Text style={styles.headerText}>Welcome!</Text>
+            </View>
+            <View>
+              <Image 
+              source={require("../../public/images/githubLogo.png")}
+              style={{ width: 50, height: 50 }}
+              />
             </View>
             <View style={styles.spaceBtwn}>
               <MyButton
@@ -73,34 +80,14 @@ const styles = StyleSheet.create({
     position: 'absolute',
     right: 0,
   },
-  body: {
-    backgroundColor: 'white',
-  },
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-    color: 'black',
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-    color: 'black',
-  },
-  highlight: {
-    fontWeight: '700',
-  },
-  footer: {
-    color: 'purple',
-    fontSize: 12,
-    fontWeight: '600',
-    padding: 4,
-    paddingRight: 12,
-    textAlign: 'right',
+  headerText: {
+    marginTop: 10,
+    marginBottom: 10,
+    color: '#fdd32a',
+    fontSize: 15,
+    textAlign: 'center',
+    fontWeight: 'bold',
+    fontFamily: 'monospace',
   },
   spaceBtwn: {
     marginTop: 15,
