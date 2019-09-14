@@ -6,7 +6,7 @@ import * as screen from './src/screens/index';
 const AppNavigator = createStackNavigator(
   {
     Home: {screen: screen.Home},
-    Repos: {screen: screen.Repos}
+    Repos: {screen: screen.Repos},
   },
   {
     initialRouteName: 'Home',

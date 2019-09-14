@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React, {Fragment} from 'react';
 import {
   SafeAreaView,
   StyleSheet,
@@ -6,49 +6,47 @@ import {
   View,
   Text,
   Image,
-  StatusBar
-} from "react-native";
+  Header,
+  StatusBar,
+} from 'react-native';
 
 // import AsyncStorage from "@react-native-community/async-storage";
 
-import MyButton from "../components/MyButton";
+import MyButton from '../components/MyButton';
 
 export default class Home extends React.Component {
   constructor() {
     super();
     this.state = {
-      user: undefined
+      user: undefined,
     };
   }
 
   render() {
-    
-      return (
-        <Fragment>
-      <StatusBar barStyle="dark-content" />
-      <SafeAreaView>
-        <ScrollView
-          contentInsetAdjustmentBehavior="automatic"
-          style={styles.scrollView}>
-          
-          <View>
-            <Text>
-              Hola mundo!
-            </Text>
+    return (
+      <Fragment>
+        <StatusBar 
+          backgroundColor='black'
+        />
+        <SafeAreaView style={styles.header}>
+          <ScrollView
+            contentInsetAdjustmentBehavior="automatic"
+            style={styles.scrollView}>
+            <View style={styles.header}>
+              <Text style={styles.headerText}>FIND YOUR REPO</Text>
             </View>
-          <View>
-            <MyButton
-                    onPress={() => this.props.navigation.navigate('Repos')}
-                    title="Repos"
-                    color="white"
-                    accessibilityLabel="Go to repos screen"
-                  />
-          </View>
-        </ScrollView>
-      </SafeAreaView>
-    </Fragment>
-      );
-      
+            <View style={styles.spaceBtwn}>
+              <MyButton
+                onPress={() => this.props.navigation.navigate('Repos')}
+                title="Repos"
+                color="white"
+                accessibilityLabel="Go to repos screen"
+              />
+            </View>
+          </ScrollView>
+        </SafeAreaView>
+      </Fragment>
+    );
   }
 }
 
@@ -89,4 +87,19 @@ const styles = StyleSheet.create({
     paddingRight: 12,
     textAlign: 'right',
   },
+  spaceBtwn: {
+    marginTop: 15,
+    marginBottom: 15
+  },
+  header: {
+    backgroundColor: 'white'
+  },
+  headerText: {
+    marginTop: 10,
+    marginBottom: 10,
+    color: '#73C2BE',
+    fontSize: 25,
+    textAlign: 'center',
+    fontWeight: 'bold'
+  }
 });

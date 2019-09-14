@@ -19,7 +19,7 @@ export default class Repos extends React.Component {
     super();
     this.state = {
       data: [],
-      testName: 'Miriam'
+      testName: 'Miriam',
     };
   }
 
@@ -38,11 +38,10 @@ export default class Repos extends React.Component {
     }
   }
 
-
   render() {
     return (
       <Fragment>
-        <StatusBar barStyle="dark-content" />
+        <StatusBar/>
         <SafeAreaView>
           <ScrollView
             contentInsetAdjustmentBehavior="automatic"
@@ -50,7 +49,7 @@ export default class Repos extends React.Component {
             <View>
               <Text>Hola soy repos!</Text>
             </View>
-            <View>
+            <View style={styles.spaceBtwn}>
               <MyButton
                 onPress={() => this.props.navigation.navigate('Home')}
                 title="Home"
@@ -103,4 +102,8 @@ const styles = StyleSheet.create({
     paddingRight: 12,
     textAlign: 'right',
   },
+  spaceBtwn: {
+    marginTop: 15,
+    marginBottom: 15
+  }
 });
