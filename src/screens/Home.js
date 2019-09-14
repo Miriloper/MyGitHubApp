@@ -6,7 +6,6 @@ import {
   View,
   Text,
   Image,
-  ImageBackground,
   Header,
   StatusBar,
 } from 'react-native';

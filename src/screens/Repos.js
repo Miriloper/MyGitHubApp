@@ -39,6 +39,19 @@ export default class Repos extends React.Component {
     }
   }
 
+  checkForUser() {
+    console.log(this.state)
+    if (this.state.data == null) {
+      return "loading...";
+    }
+    else if (this.state.data.length == 0) {
+      return "Repos is empty"
+    }
+    else {
+      return this.state.data[0].owner.login;
+    }
+  }
+
   render() {
     return (
       <Fragment>
@@ -55,6 +68,9 @@ export default class Repos extends React.Component {
               source={require("../../public/images/githubLogo.png")}
               style={{ width: 50, height: 50 }}
               />
+              <Text>
+                {/* {this.state.data[0].owner.login} */ this.checkForUser()}
+              </Text>
             </View>
             <View style={styles.spaceBtwn}>
               <MyButton
