@@ -27,12 +27,15 @@ const styles = StyleSheet.create({
   button: {
     alignItems: 'center',
     backgroundColor: '#fdd32a',
-    padding: 10,
-    borderRadius: 5,
+    padding: 20,
+    borderRadius: 18,
+    marginHorizontal: 20,
+    paddingHorizontal: 120
   },
 
   text: {
     color: '#0d0906',
-    fontFamily: 'monospace'
+    fontFamily: 'Mark-Regular',
+    fontSize: 18
   },
 });

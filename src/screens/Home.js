@@ -32,19 +32,19 @@ export default class Home extends React.Component {
             //fillViewport="true"
             style={styles.scrollView}>
             <View style={styles.header}>
-              <Text style={styles.headerText}>Find your repo</Text>
+              <Text style={styles.headerText}>GitHubMe</Text>
               <Image
                 source={require('../../public/images/githubLogo.png')}
                 style={{width: 200, height: 200}}
               />
+            </View>
+            <View style={styles.homeButton}>
               <MyButton
                 onPress={() => this.props.navigation.navigate('Repos')}
                 title="Repos"
-                style={styles.homeButton}
                 accessibilityLabel="Go to repos screen"
               />
             </View>
-
           </ScrollView>
         </SafeAreaView>
       </Fragment>
@@ -54,22 +54,24 @@ export default class Home extends React.Component {
 
 const styles = StyleSheet.create({
   scrollView: {
-    backgroundColor: 'transparent'
+    backgroundColor: 'transparent',
   },
   header: {
     backgroundColor: '#f6f6f4', //'#f8b600'
     alignItems: 'center',
+    flex: 1
   },
   headerText: {
     marginTop: 10,
     marginBottom: 10,
-    color: '#fdd32a',
-    fontSize: 25,
+    color: '#0d0906',
+    fontSize: 35,
     textAlign: 'center',
-    fontWeight: 'bold',
-    fontFamily: 'monospace',
+    fontFamily: 'Mark-Regular',
+    marginBottom: 50,
+    marginTop: 30
   },
   homeButton: {
-    backgroundColor: 'red'
+    marginTop: 50
   }
 });

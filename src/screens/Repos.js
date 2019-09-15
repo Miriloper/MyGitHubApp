@@ -20,6 +20,7 @@ export default class Repos extends React.Component {
     this.state = {
       data: [],
       testName: 'Miriam',
+      avatarUrl: require("../../public/images/githubLogo.png")
     };
   }
 
@@ -41,14 +42,27 @@ export default class Repos extends React.Component {
 
   checkForUser() {
     console.log(this.state)
-    if (this.state.data == null) {
+    if (this.state.data.length == 0) {
       return "loading...";
     }
-    else if (this.state.data.length == 0) {
-      return "Repos is empty"
+    else if (this.state.data == null) {
+      return "Repos is empty";
     }
     else {
       return this.state.data[0].owner.login;
+    }
+  }
+
+  manageAvatar() {
+    console.log(this.state)
+    if (this.state.data.length == 0) {
+      return require("../../public/images/githubLogo.png");
+    }
+    else if (this.state.data == null) {
+      return require("../../public/images/githubLogo.png");
+    }
+    else {
+      return { uri: this.state.data[0].owner.avatar_url};
     }
   }
 
@@ -63,13 +77,13 @@ export default class Repos extends React.Component {
             <View>
               <Text style={styles.headerText}>Welcome!</Text>
             </View>
-            <View>
+            <View style={styles.header}>
               <Image 
-              source={require("../../public/images/githubLogo.png")}
-              style={{ width: 50, height: 50 }}
+              source={ this.manageAvatar() }
+              style={styles.roundAvatar}
               />
-              <Text>
-                {/* {this.state.data[0].owner.login} */ this.checkForUser()}
+              <Text style={styles.textAvatar}>
+                {this.checkForUser()}
               </Text>
             </View>
             <View style={styles.spaceBtwn}>
@@ -96,11 +110,14 @@ const styles = StyleSheet.create({
     position: 'absolute',
     right: 0,
   },
+  header: {
+    alignItems: 'center'
+  },
   headerText: {
-    marginTop: 10,
+    marginTop: 13,
     marginBottom: 10,
     color: '#fdd32a',
-    fontSize: 15,
+    fontSize: 20,
     textAlign: 'center',
     fontWeight: 'bold',
     fontFamily: 'monospace',
@@ -108,5 +125,19 @@ const styles = StyleSheet.create({
   spaceBtwn: {
     marginTop: 15,
     marginBottom: 15
+  },
+  roundAvatar: {
+    width: 120,
+    height: 120,
+    borderRadius: 100,
+    overflow: 'hidden'
+  },
+  textAvatar: {
+    fontFamily: 'monospace',
+    color: '#0d0906',
+    fontSize: 15,
+    textAlign: 'center',
+    display: 'flex',
+    marginTop: 10
   }
 });
