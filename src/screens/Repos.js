@@ -67,6 +67,16 @@ export default class Repos extends React.Component {
     }
   }
 
+  showButton(){
+    if (this.state.data.length == 0) {
+      return 'none';
+    } else if (this.state.data == null) {
+      return 'none';
+    } else {
+      return 'flex';
+    }
+  }
+
   sortManager() {
     let nextSort = null;
     let sortedData = null;
@@ -140,7 +150,7 @@ export default class Repos extends React.Component {
               <Image source={this.manageAvatar()} style={styles.roundAvatar} />
               <Text style={styles.textAvatar}>{this.checkForUser()}</Text>
             </View>
-            <View style={styles.spaceBtwn}>
+            <View style={[styles.spaceBtwn, {display: this.showButton()}]}>
               <MyButton
                 onPress={() => this.sortManager()}
                 title={'Sorted by ' + this.state.sortType}
