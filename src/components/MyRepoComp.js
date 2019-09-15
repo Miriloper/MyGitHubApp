@@ -22,7 +22,7 @@ export default class MyRepoComp extends Component {
         ToastModule.show('Opening ' + repoName, ToastModule.LENGTH_LONG);
         Linking.openURL(url);
       } else {
-        ToastModule.show('Something happened', ToastModule.LENGTH_SHORT);
+        ToastModule.show('Something happened', ToastModule.LENGTH_LONG);
         console.log("Don't know how to open URL: " + url);
       }
     });
@@ -49,6 +49,7 @@ export default class MyRepoComp extends Component {
             ViewComponent={LinearGradient}
             title={el.name}
             subtitle={moment(el.updated_at).format('MM/DD/YYYY h:mm a')}
+            badge={{ value: el.size, textStyle: { color: 'white', fontFamily: 'Mark-Bold' }, justifyContent: 'center', status: 'warning' }}
             bottomDivider
             chevron
           />

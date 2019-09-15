@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
-    paddingHorizontal: 10,
+    paddingHorizontal: 10
   },
   button: {
     alignItems: 'center',
@@ -30,7 +30,8 @@ const styles = StyleSheet.create({
     padding: 20,
     borderRadius: 18,
     marginHorizontal: 20,
-    paddingHorizontal: 120
+    paddingHorizontal: 20,
+    width: 300
   },
 
   text: {
