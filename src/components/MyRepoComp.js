@@ -5,6 +5,9 @@ import TouchableScale from 'react-native-touchable-scale';
 import LinearGradient from 'react-native-linear-gradient';
 import moment from 'moment'
 
+import { NativeModules } from 'react-native';
+const { ToastModule } = NativeModules;
+
 export default class MyRepoComp extends Component {
   constructor(props) {
     super(props);
@@ -13,11 +16,13 @@ export default class MyRepoComp extends Component {
     };
   }
 
-  handleClick(url) {
+  handleClick(repoName, url) {
     Linking.canOpenURL(url).then(supported => {
       if (supported) {
+        ToastModule.show('Opening ' + repoName, ToastModule.LENGTH_LONG);
         Linking.openURL(url);
       } else {
+        ToastModule.show('Something happened', ToastModule.LENGTH_SHORT);
         console.log("Don't know how to open URL: " + url);
       }
     });
@@ -30,7 +35,7 @@ export default class MyRepoComp extends Component {
           <ListItem
             style={styles.spaceBtwn}
             button
-            onPress={() => this.handleClick(el.html_url)}
+            onPress={() => this.handleClick(el.name, el.html_url)}
             key={i}
             Component={TouchableScale}
             friction={90}
