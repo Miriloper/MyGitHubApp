@@ -20,20 +20,28 @@ const sortTypes = {
   bySize: 'Size',
 };
 
+const reposStatus = {
+  loading: 0,
+  reposEmpty: 1,
+  userSuccess: 2,
+  userNotFound: 3,
+};
+
 export default class Repos extends React.Component {
   constructor() {
     super();
     this.state = {
-      data: [],
-      testName: 'Miriam',
+      data: null,
       avatarUrl: require('../../public/images/githubLogo.png'),
       sortType: sortTypes.byName,
+      status: reposStatus.loading,
     };
   }
 
   async componentDidMount() {
     try {
-      const url = 'https://api.github.com/users/miriloper/repos';
+      const url = `https://api.github.com/users/${this.props.navigation.state.params.username}/repos`;
+      //const url = 'https://api.github.com/users/miriloper/repos';
       //https://api.github.com/users/${username}/repos
       const response = await fetch(url);
       const dataAll = await response.json();
@@ -41,39 +49,62 @@ export default class Repos extends React.Component {
       this.setState({
         ...this.state,
         data: dataAll,
+        status: this.manageStatus(dataAll)
       });
     } catch (error) {
       console.log(error);
     }
   }
 
-  checkForUser() {
-    if (this.state.data.length == 0) {
-      return 'loading...';
-    } else if (this.state.data == null) {
-      return 'Repos is empty';
+  manageStatus(repos) {
+    if (repos == null) {
+      return reposStatus.loading;
+    } else if (repos.length == 0) {
+      return reposStatus.reposEmpty;
+    } else if (Array.isArray(repos)) {
+      return reposStatus.userSuccess;
     } else {
-      return this.state.data[0].owner.login;
+      return reposStatus.userNotFound;
+    }
+  }
+
+  checkForUser() {
+    switch (this.state.status) {
+      case reposStatus.loading:
+        return 'loading...';
+
+      case reposStatus.reposEmpty:
+        return 'Repos is empty';
+
+      case reposStatus.userSuccess:
+        return this.state.data[0].owner.login;
+
+      case reposStatus.userNotFound:
+        return 'User not found';
     }
   }
 
   manageAvatar() {
-    if (this.state.data.length == 0) {
-      return require('../../public/images/githubLogo.png');
-    } else if (this.state.data == null) {
-      return require('../../public/images/githubLogo.png');
-    } else {
-      return {uri: this.state.data[0].owner.avatar_url};
+    switch (this.state.status) {
+      case reposStatus.loading:
+      case reposStatus.reposEmpty:
+      case reposStatus.userNotFound:
+        return require('../../public/images/githubLogo.png');
+
+      case reposStatus.userSuccess:
+        return {uri: this.state.data[0].owner.avatar_url};
     }
   }
 
-  showButton(){
-    if (this.state.data.length == 0) {
-      return 'none';
-    } else if (this.state.data == null) {
-      return 'none';
-    } else {
-      return 'flex';
+  showButton() {
+    switch (this.state.status) {
+      case reposStatus.loading:
+      case reposStatus.reposEmpty:
+      case reposStatus.userNotFound:
+        return 'none';
+
+      case reposStatus.userSuccess:
+        return 'flex';
     }
   }
 
@@ -94,14 +125,14 @@ export default class Repos extends React.Component {
         nextSort = sortTypes.byName;
         break;
     }
-    if(nextSort && sortedData) {
+    if (nextSort && sortedData) {
       this.setState({
         ...this.state,
         sortType: nextSort,
         data: sortedData,
       });
     } else {
-      console.log("Error: unknown sort type.")
+      console.log('Error: unknown sort type.');
     }
   }
 
@@ -120,8 +151,8 @@ export default class Repos extends React.Component {
   sortedDataByUpdate() {
     let sortedData = [...this.state.data];
     sortedData.sort((a, b) => {
-      let aDate = new Date(a.updated_at)
-      let bDate = new Date(b.updated_at)
+      let aDate = new Date(a.updated_at);
+      let bDate = new Date(b.updated_at);
       return bDate - aDate;
     });
     return sortedData;
@@ -130,7 +161,7 @@ export default class Repos extends React.Component {
   sortedDataBySize() {
     let sortedData = [...this.state.data];
     sortedData.sort((a, b) => {
-      return b.size - a.size;;
+      return b.size - a.size;
     });
     return sortedData;
   }

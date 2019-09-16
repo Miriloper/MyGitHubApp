@@ -29,33 +29,40 @@ export default class MyRepoComp extends Component {
   }
 
   render() {
-    return (
-      <View>
-        {this.props.repos.map((el, i) => (
-          <ListItem
-            style={styles.spaceBtwn}
-            button
-            onPress={() => this.handleClick(el.name, el.html_url)}
-            key={i}
-            Component={TouchableScale}
-            friction={90}
-            tension={100}
-            activeScale={0.95} //
-            linearGradientProps={{
-              colors: ['#f6f6f4', '#f6f6f4'],
-              start: {x: 1, y: 0},
-              end: {x: 0.2, y: 0},
-            }}
-            ViewComponent={LinearGradient}
-            title={el.name}
-            subtitle={moment(el.updated_at).format('MM/DD/YYYY h:mm a')}
-            badge={{ value: el.size, textStyle: { color: 'white', fontFamily: 'Mark-Bold' }, justifyContent: 'center', status: 'warning' }}
-            bottomDivider
-            chevron
-          />
-        ))}
-      </View>
-    );
+    if (this.props.repos != null) {
+      if (Array.isArray(this.props.repos)) {
+        return (
+          <View>
+            {this.props.repos.map((el, i) => (
+              <ListItem
+                style={styles.spaceBtwn}
+                button
+                onPress={() => this.handleClick(el.name, el.html_url)}
+                key={i}
+                Component={TouchableScale}
+                friction={90}
+                tension={100}
+                activeScale={0.95} //
+                linearGradientProps={{
+                  colors: ['#f6f6f4', '#f6f6f4'],
+                  start: {x: 1, y: 0},
+                  end: {x: 0.2, y: 0},
+                }}
+                ViewComponent={LinearGradient}
+                title={el.name}
+                subtitle={moment(el.updated_at).format('MM/DD/YYYY h:mm a')}
+                badge={{ value: el.size, textStyle: { color: 'white', fontFamily: 'Mark-Bold' }, justifyContent: 'center', status: 'warning' }}
+                bottomDivider
+                chevron
+              />
+            ))}
+          </View> 
+      )} else {
+        return null;
+      }
+    } else {
+      return null;
+    }
   }
 }
 
