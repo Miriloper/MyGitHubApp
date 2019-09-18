@@ -40,7 +40,7 @@ export default class Repos extends React.Component {
 
   async componentDidMount() {
     try {
-      const url = `https://api.github.com/users/${this.props.navigation.state.params.username}/repos`;
+      const url = `https://api.github.com/users/${this.props.navigation.state.params.username}/repos?per_page=100`;
       //const url = 'https://api.github.com/users/miriloper/repos';
       //https://api.github.com/users/${username}/repos
       const response = await fetch(url);
